@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/javaSeleniumBrowserstackJenkins001.iml" filepath="$PROJECT_DIR$/.idea/modules/javaSeleniumBrowserstackJenkins001.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/javaSeleniumBrowserstackJenkins001_main.iml" filepath="$PROJECT_DIR$/.idea/modules/javaSeleniumBrowserstackJenkins001_main.iml" group="javaSeleniumBrowserstackJenkins001" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/javaSeleniumBrowserstackJenkins001_test.iml" filepath="$PROJECT_DIR$/.idea/modules/javaSeleniumBrowserstackJenkins001_test.iml" group="javaSeleniumBrowserstackJenkins001" />
+    </modules>
+  </component>
+</project>
