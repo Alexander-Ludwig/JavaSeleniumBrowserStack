@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.amazon.testTheHomePage" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-12-12T21:05:33" hostname="LAPTOP-LCO4KE4N" time="90.895">
+<testsuite name="com.amazon.testTheHomePage" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-12-20T03:29:40" hostname="LAPTOP-LCO4KE4N" time="112.067">
   <properties/>
-  <testcase name="SAPSuccessFactorsCreateNewEmployeeViaBrowserStack" classname="com.amazon.testTheHomePage" time="90.895"/>
+  <testcase name="SAPSFCreateNewEmployeeViaBrowserStackUseCSV(crichardson,Zag2018!,Jaimeeeeeeeee,Tiberius,Kirkkkkkkk) [0]" classname="com.amazon.testTheHomePage" time="112.067"/>
   <system-out><![CDATA[***typed the search item
 ***clicked on the search button
+***Clicked on __box0-arrow
+***Clicked on __box0-inner
+***sendKeys ACME New Zealand
+***sendKeys DOWN & RETURN
+***Clicked on __box1-arrow
+***Clicked on __box1-inner
+***sendKeys New Hire
+***sendKeys DOWN & RETURN
 ***closed down browser, Test finished Successfully 
 ]]></system-out>
-  <system-err><![CDATA[Dec 13, 2018 10:05:38 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+  <system-err><![CDATA[Dec 20, 2018 4:29:48 PM org.openqa.selenium.remote.ProtocolHandshake createSession
 INFO: Detected dialect: OSS
 ]]></system-err>
 </testsuite>
