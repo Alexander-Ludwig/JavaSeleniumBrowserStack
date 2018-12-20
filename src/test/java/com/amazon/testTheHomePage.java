@@ -1,7 +1,11 @@
 package com.amazon;
 
 
+import junitparams.FileParameters;
+import junitparams.JUnitParamsRunner;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -16,121 +20,48 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
+@RunWith(JUnitParamsRunner.class)
+
 public class testTheHomePage extends baseTestTheHomePage {
 
-    public static void main(String[] args) throws InterruptedException {
-
-        // Create a new instance of the Firefox driver
-        WebDriver driver = new ChromeDriver();
-
-        //Launch the Online Store Website
-        driver.get("http://www.amazon.com");
-
-        // Print a Log In message to the screen
-        System.out.println("Successfully opened the website www.Store.Demoqa.com");
-
-        //Wait for 5 Sec
-        sleep(5000);
-
-        // Close the driver
-        driver.quit();
-    }
-
-    @Test
-    public void SAPSFCreateNewEmployee() throws InterruptedException {
-        GetGlobalVariables();
-        // Start a new Chrome browser instance and maximize the browser window
-        WebDriver driver = new ChromeDriver();
-//        WebDriver driver = new InternetExplorerDriver();
-        driver.manage().window().maximize();
-        System.out.println("***maximised the browser window");
-        // Navigate to the SAPstore.com home page
-        driver.get("https://pmsalesdemo8.successfactors.com/login?company=SFPART016109#/login");
-        System.out.println("***navigated to website");
-        sleep(3000);
-
-//        Login to Success Factors
-        driver.findElement(By.id("__input1-inner")).sendKeys("crichardson");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.findElement(By.id("__input2-inner")).sendKeys("Zag2018!");
-
-//        Click on the Login button
-//        driver.findElement(By.id("__button2-content")).click();
-//        $(byText("Log in")).click();
-        driver.findElement(By.id("__button2")).click();
-        sleep(10000);
-
-
-        // Type "Add New Employee" in the search field
-        driver.findElement(By.id("bizXSearchField-I")).sendKeys(valueToBeSearched2);
-        System.out.println("***typed the search item");
-        sleep(3000);
-
-//        Send the Enter Key twice
-        WebElement textbox = driver.findElement(By.id("bizXSearchField-I"));
-        sleep(3000);
-        textbox.sendKeys(Keys.RETURN);
-        sleep(3000);
-        textbox.sendKeys(Keys.RETURN);
-        // Click on the search button
-//        driver.findElement(By.xpath("//input[@value='Go']")).click();
-//        driver.findElement(By.xpath("//*[@id='submit-search']")).click();
-        System.out.println("***clicked on the search button");
-        sleep(3000);
-
-//        Add new employee details
-//        driver.findElement(By.id("__box0")).setValue;
-        sleep(5000);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(By.id("__input0-inner")).sendKeys("James");
-        sleep(5000);
-        driver.findElement(By.id("__input0-inner")).sendKeys(Keys.TAB);
-//        Actions action = new Actions(driver);
-//        action.moveToElement("__input1-inner");
-        sleep(5000);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(By.id("__input1-inner")).sendKeys("Tiberius");
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//        action.moveToElement((By.id("__input2-inner"));
-        driver.findElement(By.id("__input2-inner")).sendKeys("Kirk");
-        sleep(5000);
-
-
-
-//
-// close the browser
-        driver.quit();
-        System.out.println("***closed down browser");
-
-    }
-
-
-
-    //    public static String USERNAME = "robertoureta4";
-    public static String USERNAME = "robert1049";
-    //    public static String AUTOMATE_KEY = "djqU7LpGsAeKWFcx93hB";
-    public static String AUTOMATE_KEY = "jHiuD4CFHSS3AB8sQQN3";
+//    public static String USERNAME = "robert1049";
+public static String USERNAME = "robertoureta3";
+//    public static String AUTOMATE_KEY = "jHiuD4CFHSS3AB8sQQN3";
+public static String AUTOMATE_KEY = "WcHno2SvoajJzy25LzkK";
     public static String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
 
+
+//    The following test runs successfully using browserStack & Data is retrieved from CSV file...Date:18/12/2018
+
     @Test
-    public void SAPSuccessFactorsCreateNewEmployeeViaBrowserStack() throws MalformedURLException, InterruptedException {
-        GetGlobalVariables();
+    @Category(RegressionTests.class)
+    @FileParameters("src/test/resources/NewEmployeeTestParameters.csv")
+    public void SAPSFCreateNewEmployeeViaBrowserStackUseCSV(String username001, String password001, String FirstName, String MiddleName, String LastName) throws MalformedURLException, InterruptedException {
+//        GetDesiredCapabilities();
+        DesiredCapabilities caps = new DesiredCapabilities();
 
-//        DesiredCapabilities caps = new DesiredCapabilities();
-//        caps.setCapability("browserName", "iPhone");
-//        caps.setCapability("device", "iPhone 8 Plus");
-//        caps.setCapability("realMobile", "true");
-//        caps.setCapability("os_version", "11.0");
-//        caps.setCapability("browserstack.debug", "true");
+         if (browserTesting.equals("true")) {
 
-//        DesiredCapabilities caps = new DesiredCapabilities();
-//        caps.setCapability("browser", "Firefox");
-//        caps.setCapability("browser_version", "63.0");
-//        caps.setCapability("os", "Windows");
-//        caps.setCapability("os_version", "10");
-//        caps.setCapability("resolution", "1024x768");
+            caps.setCapability("browser", browser);
+            caps.setCapability("browser_version", browser_version);
+            caps.setCapability("os", os);
+            caps.setCapability("os_version", os_version);
+            caps.setCapability("resolution", resolution);
+        }
 
 
+
+
+       if (browserTesting.equals("false")) {
+
+           caps.setCapability("browserName", browserName);
+           caps.setCapability("device", device);
+           caps.setCapability("realMobile", realMobile);
+           caps.setCapability("os_version", os_version);
+           caps.setCapability("browser", browser);
+           caps.setCapability("browser_version", browser_version);
+       }
+//        For Browser running on a Windows machine...here's an example of the required capabilities
 //        DesiredCapabilities caps = new DesiredCapabilities();
 //        caps.setCapability("browser", "Chrome");
 //        caps.setCapability("browser_version", "62.0");
@@ -138,23 +69,7 @@ public class testTheHomePage extends baseTestTheHomePage {
 //        caps.setCapability("os_version", "10");
 //        caps.setCapability("resolution", "1024x768");
 
-
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("browser", "IE");
-        caps.setCapability("browser_version", "11.0");
-        caps.setCapability("os", "Windows");
-        caps.setCapability("os_version", "10");
-        caps.setCapability("resolution", "1024x768");
-
-
-//        DesiredCapabilities caps = new DesiredCapabilities();
-//        caps.setCapability("browser", "IE");
-//        caps.setCapability("browser_version", "11.0");
-//        caps.setCapability("os", "Windows");
-//        caps.setCapability("os_version", "10");
-//        caps.setCapability("resolution", "1280x1024");
-
-
+//        For Android/IOS device...here's an example of the required capabilities
 //        DesiredCapabilities caps = new DesiredCapabilities();
 //        caps.setCapability("browserName", "android");
 //        caps.setCapability("device", "Samsung Galaxy S8 Plus");
@@ -170,14 +85,16 @@ public class testTheHomePage extends baseTestTheHomePage {
         driver.get("https://pmsalesdemo8.successfactors.com/login?company=SFPART016109#/login");
         sleep(10000);
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-        driver.findElement(By.id("__input1-inner")).sendKeys("crichardson");
+//        driver.findElement(By.id("__input1-inner")).sendKeys("crichardson");
+        driver.findElement(By.id("__input1-inner")).sendKeys(username001);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(By.id("__input2-inner")).sendKeys("Zag2018!");
+//        driver.findElement(By.id("__input2-inner")).sendKeys("Zag2018!");
+        driver.findElement(By.id("__input2-inner")).sendKeys(password001);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElement(By.id("__button2-content")).click();
         sleep(7000);
         // Type "Add New Employee" in the search field
-        driver.findElement(By.id("bizXSearchField-I")).sendKeys(valueToBeSearched2);
+        driver.findElement(By.id("bizXSearchField-I")).sendKeys(valueToBeSearched);
         System.out.println("***typed the search item");
         sleep(5000);
 
@@ -192,41 +109,92 @@ public class testTheHomePage extends baseTestTheHomePage {
 //        driver.findElement(By.xpath("//*[@id='submit-search']")).click();
         System.out.println("***clicked on the search button");
         sleep(10000);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(By.id("__input0-inner")).sendKeys("James");
+
+        //      Select Company "ACME New Zealand (1001)"
+
+        driver.findElement(By.id("__box0-arrow")).click();
+        System.out.println("***Clicked on __box0-arrow");
+        sleep(3000);
+        WebElement mySelectElement1 = driver.findElement(By.id("__box0-inner"));
+        mySelectElement1.click();
+        System.out.println("***Clicked on __box0-inner");
+        mySelectElement1.sendKeys("ACME New Zealand");
+        System.out.println("***sendKeys ACME New Zealand");
+        sleep(5000);
+        WebElement mySelectElement2 = driver.findElement(By.id("__box0-inner"));
+        mySelectElement2.sendKeys(Keys.DOWN, Keys.RETURN);
+        System.out.println("***sendKeys DOWN & RETURN");
+        sleep(3000);
+
+//      Event Reason "NEW HIRE"
+
+        driver.findElement(By.id("__box1-arrow")).click();
+        System.out.println("***Clicked on __box1-arrow");
+        sleep(3000);
+        WebElement myEventReasonElement1 = driver.findElement(By.id("__box1-inner"));
+        myEventReasonElement1.click();
+        System.out.println("***Clicked on __box1-inner");
+        myEventReasonElement1.sendKeys("New Hire");
+        System.out.println("***sendKeys New Hire");
+        sleep(5000);
+        WebElement myEventReasonElement2 = driver.findElement(By.id("__box1-inner"));
+        myEventReasonElement2.sendKeys(Keys.DOWN, Keys.RETURN);
+        System.out.println("***sendKeys DOWN & RETURN");
+        sleep(3000);
+
+
+
+//      First name
+        driver.findElement(By.id("__input0-inner")).sendKeys(FirstName);
         sleep(5000);
         driver.findElement(By.id("__input0-inner")).sendKeys(Keys.TAB);
 //        Actions action = new Actions(driver);
 //        action.moveToElement("__input1-inner");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(By.id("__input1-inner")).sendKeys("Tiberius");
+        driver.findElement(By.id("__input1-inner")).sendKeys(MiddleName);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 //        action.moveToElement((By.id("__input2-inner"));
-        driver.findElement(By.id("__input2-inner")).sendKeys("Kirk");
+        driver.findElement(By.id("__input2-inner")).sendKeys(LastName);
         sleep(5000);
-//
-        driver.quit();
+
+
+
+        //        Complete New Employee application form from this point...
+//        Display Name
+        driver.findElement(By.id("__input3-inner")).sendKeys(MiddleName);
+//        Birth Name
+        driver.findElement(By.id("__input4-inner")).sendKeys(MiddleName);
+//        Date of Birth
+        driver.findElement(By.id("__picker1-inner")).sendKeys("01/10/77");
+//        Country of Birth
+        driver.findElement(By.id("__box3-arrow")).click();
+        sleep(2000);
+        driver.findElement(By.id("__item5-__box3-11")).click();
+//        Region Of Birth
+        driver.findElement(By.id("__input5-inner")).sendKeys(MiddleName);
+
+
+
+//        driver.quit();
     }
 
+
+
+//    The following test runs successfully using browserStack...Date:18/12/2018
     @Test
+    @Category(RegressionTests.class)
     public void SAPSFCreateNewEmployeeViaBrowserStack() throws MalformedURLException, InterruptedException {
-        GetGlobalVariables();
 
-//        DesiredCapabilities caps = new DesiredCapabilities();
-//        caps.setCapability("browserName", "iPhone");
-//        caps.setCapability("device", "iPhone 8 Plus");
-//        caps.setCapability("realMobile", "true");
-//        caps.setCapability("os_version", "11.0");
-//        caps.setCapability("browserstack.debug", "true");
+//        GetDesiredCapabilities();
 
-//        DesiredCapabilities caps = new DesiredCapabilities();
-//        caps.setCapability("browser", "Firefox");
-//        caps.setCapability("browser_version", "63.0");
-//        caps.setCapability("os", "Windows");
-//        caps.setCapability("os_version", "10");
-//        caps.setCapability("resolution", "1024x768");
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("browser", browser);
+        caps.setCapability("browser_version", browser_version);
+        caps.setCapability("os", os);
+        caps.setCapability("os_version", os_version);
+        caps.setCapability("resolution", resolution);
 
-
+//        For Browser running on a Windows machine...here's an example of the required capabilities
 //        DesiredCapabilities caps = new DesiredCapabilities();
 //        caps.setCapability("browser", "Chrome");
 //        caps.setCapability("browser_version", "62.0");
@@ -234,23 +202,7 @@ public class testTheHomePage extends baseTestTheHomePage {
 //        caps.setCapability("os_version", "10");
 //        caps.setCapability("resolution", "1024x768");
 
-
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("browser", "IE");
-        caps.setCapability("browser_version", "11.0");
-        caps.setCapability("os", "Windows");
-        caps.setCapability("os_version", "10");
-        caps.setCapability("resolution", "1024x768");
-
-
-//        DesiredCapabilities caps = new DesiredCapabilities();
-//        caps.setCapability("browser", "IE");
-//        caps.setCapability("browser_version", "11.0");
-//        caps.setCapability("os", "Windows");
-//        caps.setCapability("os_version", "10");
-//        caps.setCapability("resolution", "1280x1024");
-
-
+//        For Android/IOS device...here's an example of the required capabilities
 //        DesiredCapabilities caps = new DesiredCapabilities();
 //        caps.setCapability("browserName", "android");
 //        caps.setCapability("device", "Samsung Galaxy S8 Plus");
@@ -260,8 +212,6 @@ public class testTheHomePage extends baseTestTheHomePage {
         java.net.URL browserStackURL = new URL(URL);
         WebDriver driver = new RemoteWebDriver(browserStackURL, caps);
         driver.manage().window().maximize();
-//        WebDriver driver = new RemoteWebDriver(new URL(URL), caps);
-//        driver.get("http://www.google.com");
 
         driver.get("https://pmsalesdemo8.successfactors.com/login?company=SFPART016109#/login");
         sleep(10000);
@@ -273,7 +223,7 @@ public class testTheHomePage extends baseTestTheHomePage {
         driver.findElement(By.id("__button2-content")).click();
         sleep(7000);
         // Type "Add New Employee" in the search field
-        driver.findElement(By.id("bizXSearchField-I")).sendKeys(valueToBeSearched2);
+        driver.findElement(By.id("bizXSearchField-I")).sendKeys(valueToBeSearched);
         System.out.println("***typed the search item");
         sleep(5000);
 
@@ -305,6 +255,123 @@ public class testTheHomePage extends baseTestTheHomePage {
         sleep(5000);
 //
         driver.quit();
+    }
+
+
+    @Test
+    @Category(RegressionTests.class)
+    @FileParameters("src/test/resources/NewEmployeeTestParameters.csv")
+    public void SAPSFCreateNewEmployeeViaLocalChromeUseCSV(String username001, String password001, String FirstName, String MiddleName, String LastName) throws MalformedURLException, InterruptedException {
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+
+        driver.get("https://pmsalesdemo8.successfactors.com/login?company=SFPART016109#/login");
+        sleep(10000);
+        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+//        driver.findElement(By.id("__input1-inner")).sendKeys("crichardson");
+        driver.findElement(By.id("__input1-inner")).sendKeys(username001);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//        driver.findElement(By.id("__input2-inner")).sendKeys("Zag2018!");
+        driver.findElement(By.id("__input2-inner")).sendKeys(password001);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElement(By.id("__button2-content")).click();
+        sleep(7000);
+        // Type "Add New Employee" in the search field
+        driver.findElement(By.id("bizXSearchField-I")).sendKeys(valueToBeSearched);
+        System.out.println("***typed the search item");
+        sleep(5000);
+
+//        Send the Enter Key twice
+        WebElement textbox = driver.findElement(By.id("bizXSearchField-I"));
+        sleep(3000);
+        textbox.sendKeys(Keys.RETURN);
+        System.out.println("***sendKeys 1st RETURN");
+        sleep(3000);
+        textbox.sendKeys(Keys.RETURN);
+        System.out.println("***sendKeys 2nd RETURN");
+        // Click on the search button
+//        driver.findElement(By.xpath("//input[@value='Go']")).click();
+//        driver.findElement(By.xpath("//*[@id='submit-search']")).click();
+//        System.out.println("***clicked on the search button");
+        sleep(10000);
+
+
+//      Select Company
+//        driver.findElement(By.id("__box0-arrow")).click();
+//        WebElement mySelectElement = driver.findElement(By.id("__box0-inner"));
+//        sleep(3000);
+//        mySelectElement.sendKeys(Keys.DOWN, Keys.RETURN);
+//        sleep(3000);
+
+//      Select Company "ACME New Zealand (1001)"
+
+        driver.findElement(By.id("__box0-arrow")).click();
+        System.out.println("***Clicked on __box0-arrow");
+        sleep(3000);
+        WebElement mySelectElement1 = driver.findElement(By.id("__box0-inner"));
+        mySelectElement1.click();
+        System.out.println("***Clicked on __box0-inner");
+        mySelectElement1.sendKeys("ACME New Zealand");
+        System.out.println("***sendKeys ACME New Zealand");
+        sleep(5000);
+        WebElement mySelectElement2 = driver.findElement(By.id("__box0-inner"));
+        mySelectElement2.sendKeys(Keys.DOWN, Keys.RETURN);
+        System.out.println("***sendKeys DOWN & RETURN");
+        sleep(3000);
+
+//      Event Reason "NEW HIRE"
+
+        driver.findElement(By.id("__box1-arrow")).click();
+        System.out.println("***Clicked on __box1-arrow");
+        sleep(3000);
+        WebElement myEventReasonElement1 = driver.findElement(By.id("__box1-inner"));
+        myEventReasonElement1.click();
+        System.out.println("***Clicked on __box1-inner");
+        myEventReasonElement1.sendKeys("New Hire");
+        System.out.println("***sendKeys New Hire");
+        sleep(5000);
+        WebElement myEventReasonElement2 = driver.findElement(By.id("__box1-inner"));
+        myEventReasonElement2.sendKeys(Keys.DOWN, Keys.RETURN);
+        System.out.println("***sendKeys DOWN & RETURN");
+        sleep(3000);
+
+        driver.findElement(By.id("__input0-inner")).sendKeys(FirstName);
+        sleep(5000);
+        driver.findElement(By.id("__input0-inner")).sendKeys(Keys.TAB);
+//        Actions action = new Actions(driver);
+//        action.moveToElement("__input1-inner");
+        sleep(5000);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElement(By.id("__input1-inner")).sendKeys(MiddleName);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//        action.moveToElement((By.id("__input2-inner"));
+        driver.findElement(By.id("__input2-inner")).sendKeys(LastName);
+        sleep(5000);
+
+//        Use Selenide wrapper from this point...
+//        $(By.id("__box2-inner")).setValue("Mr.");
+        driver.findElement(By.id("__input3-inner")).sendKeys(MiddleName);
+//        $(By.id("__input3-inner")).setValue("MrXXX");
+//        $(By.id("__input4-inner")).setValue("MrXXXYYYZZZ");
+        driver.findElement(By.id("__input4-inner")).sendKeys(MiddleName);
+        //Date of Birth
+        driver.findElement(By.id("__picker1-inner")).sendKeys("01/10/77");
+        System.out.println("***sendKeys D.O.B");
+        //Country of Birth
+//        driver.findElement(By.id("__box3-inner")).selectByVisibleText();
+
+        driver.findElement(By.id("__box3-arrow")).click();
+        sleep(2000);
+
+        driver.findElement(By.id("__item5-__box3-11")).click();
+
+//        Region Of Birth
+        driver.findElement(By.id("__input5-inner")).sendKeys(MiddleName);
+
+
+
+//        driver.quit();
     }
 
 }
